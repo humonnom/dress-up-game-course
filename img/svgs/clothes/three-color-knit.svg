@@ -1,0 +1,18 @@
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="418.224 547.945 256.448 261.402" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+    <path d="M532.613 547.945C532.613 547.945 533.498 557.897 547.508 557.897C561.518 557.897 563.378 547.945 563.378 547.945C563.378 547.945 612.133 559.969 623.929 574.974C635.725 589.979 674.671 779.024 674.671 779.024L651.236 785.484L614.138 660.832C613.949 660.126 610.891 660.405 610.889 661.135L615.123 809.22L476.497 809.347L478.012 660.14C478.016 659.638 474.102 659.42 473.978 659.906L442.57 788.256L418.224 780.063C418.224 780.063 458.006 586.221 468.799 574.005C479.593 561.788 532.613 547.945 532.613 547.945Z" id="Fill"/>
+</defs>
+<g id="Layer">
+    <g opacity="1">
+        <use fill="#9ea8b4" fill-rule="nonzero" opacity="1" stroke="none" xlink:href="#Fill"/>
+        <clipPath clip-rule="nonzero" id="ClipPath">
+            <use xlink:href="#Fill"/>
+        </clipPath>
+        <g clip-path="url(#ClipPath)">
+            <path d="M691.622 809.304L399.782 809.304L399.782 722.185L691.622 722.185L691.622 809.304Z" fill="#d4d8dc" fill-rule="nonzero" opacity="1" stroke="none"/>
+            <path d="M691.622 722.185L399.782 722.185L399.782 635.065L691.622 635.065L691.622 722.185Z" fill="#979ba0" fill-rule="nonzero" opacity="1" stroke="none"/>
+            <path d="M691.622 635.065L399.782 635.065L399.782 547.945L691.622 547.945L691.622 635.065Z" fill="#5c6978" fill-rule="nonzero" opacity="1" stroke="none"/>
+        </g>
+    </g>
+</g>
+</svg>
