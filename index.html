@@ -26,14 +26,14 @@
   <div class="game-container">
     <!-- 캐릭터 영역 -->
     <div class="character-area">
-      <img id="character" src="img/svgs/character.svg" width="300px" alt="캐릭터">
+      <img id="character" src="img/svgs/character.svg" alt="캐릭터">
       <!-- 드롭된 아이템들이 여기에 배치됩니다 -->
       <div id="character-items"></div>
     </div>
 
     <!-- 아이템 보드 -->
     <div class="item-board">
-      <h2>아이템</h2>
+      <!--TODO: 카테고리 별 아이템 중복 방지-->
 
       <!-- 머리 카테고리 -->
       <div class="item-category">
@@ -57,8 +57,8 @@
       <div class="item-category">
         <h3>신발</h3>
         <div class="item-list">
-          <img src="img/svgs/shoes/three-lined-slipper-bottom.svg" class="item draggable" data-category="shoes" alt="슬리퍼 아래" draggable="true">
-          <img src="img/svgs/shoes/three-lined-slipper-top.svg" class="item draggable" data-category="shoes" alt="슬리퍼 위" draggable="true">
+          <img src="img/svgs/shoes/crocs.svg" alt="크록스" class="item draggable" data-category="shoes" draggable="true">
+          <img src="img/svgs/shoes/slipper.svg" alt="삼선 슬리퍼" class="item draggable" data-category="shoes" draggable="true">
         </div>
       </div>
 
@@ -67,8 +67,10 @@
         <h3>액세서리</h3>
         <div class="item-list">
           <img src="img/svgs/item/cap.svg" class="item draggable" data-category="accessory" alt="모자" draggable="true">
-          <img src="img/svgs/item/backpack-back.svg" class="item draggable" data-category="accessory" alt="백팩 뒤" draggable="true">
-          <img src="img/svgs/item/backpack-front.svg" class="item draggable" data-category="accessory" alt="백팩 앞" draggable="true">
+          <div class="item item-group draggable" data-category="accessory" draggable="true">
+            <img src="img/svgs/item/backpack-back.svg" alt="백팩 뒤" class="group-part">
+            <img src="img/svgs/item/backpack-front.svg" alt="백팩 앞" class="group-part">
+          </div>
         </div>
       </div>
     </div>

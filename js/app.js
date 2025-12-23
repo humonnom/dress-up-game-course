@@ -25,16 +25,22 @@ class DressUpGame {
   }
 
   handleDragStart(e, fromBoard = false) {
-    this.draggedElement = e.target;
+    this.draggedElement = e.currentTarget;
     this.isDraggingFromBoard = fromBoard;
 
-    e.target.classList.add('dragging');
+    e.currentTarget.classList.add('dragging');
     this.characterArea.classList.add('drag-over');
 
     // 드래그 이미지 설정
-    const img = new Image();
-    img.src = e.target.src;
-    e.dataTransfer.setDragImage(img, 50, 50);
+    if (e.currentTarget.classList.contains('item-group')) {
+      // 그룹 아이템인 경우 전체 div를 드래그 이미지로 사용
+      e.dataTransfer.setDragImage(e.currentTarget, 50, 50);
+    } else {
+      // 단일 이미지인 경우
+      const img = new Image();
+      img.src = e.currentTarget.src;
+      e.dataTransfer.setDragImage(img, 50, 50);
+    }
     e.dataTransfer.effectAllowed = 'copy';
   }
 
@@ -62,31 +68,60 @@ class DressUpGame {
 
     // 아이템 보드에서 드래그한 경우 새 아이템 생성
     if (this.isDraggingFromBoard) {
-      const rect = this.characterItems.getBoundingClientRect();
-      const x = e.clientX - rect.left - 50; // 중앙 정렬을 위해 50 빼기
-      const y = e.clientY - rect.top - 50;
-
-      this.createItemOnCharacter(this.draggedElement, x, y);
+      this.createItemOnCharacter(this.draggedElement, 0, 0);
     }
 
     this.draggedElement = null;
     this.isDraggingFromBoard = false;
   }
 
+  // 파일 경로에서 -on-body.svg 버전으로 변환
+  getOnBodyPath(originalSrc) {
+    return originalSrc.replace('.svg', '-on-body.svg');
+  }
+
   createItemOnCharacter(sourceItem, x, y) {
-    // 새로운 아이템 이미지 생성
-    const newItem = document.createElement('img');
-    newItem.src = sourceItem.src;
-    newItem.alt = sourceItem.alt;
-    newItem.className = 'placed-item';
-    newItem.style.left = `${x}px`;
-    newItem.style.top = `${y}px`;
-    // newItem.style.width = '100%';
+    // 그룹 아이템인지 확인
+    if (sourceItem.classList.contains('item-group')) {
+      // 그룹 아이템인 경우 div 컨테이너 생성
+      const newGroup = document.createElement('div');
+      newGroup.className = 'placed-item placed-group';
+      newGroup.style.position = 'absolute';
+      newGroup.style.left = `${x}px`;
+      newGroup.style.top = `${y}px`;
 
-    // 배치된 아이템에 이동 및 제거 기능 추가
-    this.addItemControls(newItem);
+      // 첫 번째 이미지의 경로를 기준으로 -on-body.svg 경로 생성
+      const firstImg = sourceItem.querySelector('.group-part');
+      const onBodySrc = this.getOnBodyPath(firstImg.src);
 
-    this.characterItems.appendChild(newItem);
+      // -on-body.svg 이미지 사용
+      const newImg = document.createElement('img');
+      newImg.src = onBodySrc;
+      newImg.alt = firstImg.alt;
+      newImg.className = 'group-part';
+      newImg.style.position = 'absolute';
+      newImg.style.width = '100%';
+      newImg.style.height = 'auto';
+      newImg.style.top = '0';
+      newImg.style.left = '0';
+      newGroup.appendChild(newImg);
+
+      // 배치된 아이템에 이동 및 제거 기능 추가
+      this.addItemControls(newGroup);
+      this.characterItems.appendChild(newGroup);
+    } else {
+      // 단일 이미지인 경우
+      const newItem = document.createElement('img');
+      newItem.src = this.getOnBodyPath(sourceItem.src);  // -on-body.svg 버전 사용
+      newItem.alt = sourceItem.alt;
+      newItem.className = 'placed-item';
+      newItem.style.left = `${x}px`;
+      newItem.style.top = `${y}px`;
+
+      // 배치된 아이템에 이동 및 제거 기능 추가
+      this.addItemControls(newItem);
+      this.characterItems.appendChild(newItem);
+    }
   }
 
   addItemControls(item) {
