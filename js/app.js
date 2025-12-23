@@ -8,6 +8,19 @@ class DressUpGame {
     this.offset = { x: 0, y: 0 };
     this.isDraggingFromBoard = false;
 
+    // 카테고리별 z-index 매핑
+    this.zIndexMap = {
+      behindBody: -1, // 몸 뒤
+      socks: 1,    // 양말
+      shoes: 2,    // 신발
+      pants: 3,    // 바지
+      top: 4,      // 상의
+      outer: 5,    // 아우터
+      accessory: 6, // 액세서리
+      hair: 7,     // 머리
+      hat: 8,      // 모자
+    };
+
     this.init();
   }
 
@@ -109,6 +122,8 @@ class DressUpGame {
   }
 
   createItemOnCharacter(sourceItem) {
+    const category = sourceItem.dataset.category;
+
     if (this.isGroupItem(sourceItem.src)) {
       const newGroup = document.createElement('div');
       newGroup.className = 'placed-item placed-group';
@@ -119,15 +134,23 @@ class DressUpGame {
       const {back, front} = this.getGroupItemOnBodyPaths(sourceItem.src);
       const newBackImg = this.createNewImgElement(back, sourceItem.alt, 'placed-item back');
       const newFrontImg = this.createNewImgElement(front, sourceItem.alt, 'placed-item front');
+
+      // 그룹 아이템은 특별한 z-index 처리
+      newBackImg.style.zIndex = this.zIndexMap.behindBody;  // 캐릭터 뒤
+      newFrontImg.style.zIndex = this.zIndexMap.accessory; // 가방 위치
+
       newGroup.appendChild(newBackImg);
       newGroup.appendChild(newFrontImg);
-
 
       // 배치된 아이템에 이동 및 제거 기능 추가
       this.addItemControls(newGroup);
       this.characterItems.appendChild(newGroup);
     } else {
       const newItem = this.createNewImgElement(this.getOnBodyPath(sourceItem.src), sourceItem.alt);
+
+      // 카테고리별 z-index 적용
+      const zIndex = this.zIndexMap[category] || 1;
+      newItem.style.zIndex = zIndex.toString();
 
       // 배치된 아이템에 이동 및 제거 기능 추가
       this.addItemControls(newItem);

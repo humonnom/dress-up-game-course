@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="108 489 163 177" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M108.464 661.779C108.464 661.779 106.353 616.259 109.599 575.426C112.845 534.593 121.448 498.447 121.448 498.447L260.105 498.447C260.105 498.447 268.145 536.095 270.836 577.368C273.527 618.642 270.87 663.541 270.87 663.541L208.673 663.344C208.673 663.344 207.385 613.865 202.372 587.769C197.359 561.673 191.223 558.962 189.621 558.962C187.593 558.962 182.748 561.891 177.645 587.745C172.542 613.598 169.211 662.35 169.211 662.35L108.464 661.779Z" id="Fill"/>
+</defs>
+<g id="Clothes-무지개-반바지">
+<use fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<g opacity="1">
+<path d="M19.2178 488.942L383.311 488.942L383.311 514.131L19.2178 514.131L19.2178 488.942Z" fill="#ec0014" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 488.942L383.311 488.942L383.311 514.131L19.2178 514.131L19.2178 488.942Z" fill="#ec0014" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 514.131L383.311 514.131L383.311 539.321L19.2178 539.321L19.2178 514.131Z" fill="#fd8d33" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 539.321L383.311 539.321L383.311 564.51L19.2178 564.51L19.2178 539.321Z" fill="#ffd335" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 564.51L383.311 564.51L383.311 589.699L19.2178 589.699L19.2178 564.51Z" fill="#70bf4f" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 589.699L383.311 589.699L383.311 614.889L19.2178 614.889L19.2178 589.699Z" fill="#2894ff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.2178 614.889L383.311 614.889L383.311 640.078L19.2178 640.078L19.2178 614.889Z" fill="#3179bd" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M19.372 640.078L383.465 640.078L383.465 665.267L19.372 665.267L19.372 640.078Z" fill="#a208ba" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</g>
+</g>
+</svg>
