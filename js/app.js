@@ -7,7 +7,7 @@ class DressUpGame {
     this.draggedElement = null;
     this.isDraggingFromBoard = false;
 
-    // 파자마 요소 참조
+    // 디폴트 의상
     this.pajamaTop = document.getElementById('pajama-top');
     this.pajamaBottom = document.getElementById('pajama-bottom');
 
@@ -25,7 +25,7 @@ class DressUpGame {
 
     // 카테고리별 z-index 매핑
     this.zIndexMap = {
-      behindBody: -1, // 몸 뒤
+      body: 0, // 몸
       socks: 1,    // 양말
       shoes: 2,    // 신발
       pants: 3,    // 바지
@@ -62,8 +62,8 @@ class DressUpGame {
     // 드래그 이미지 설정
     const img = new Image();
     img.src = e.currentTarget.src;
-    e.dataTransfer.setDragImage(img, 50, 50);
-    e.dataTransfer.effectAllowed = 'copy';
+    // e.dataTransfer.setDragImage(img, 50, 50);
+    e.dataTransfer.effectAllowed = 'move';
   }
 
   handleDragEnd(e) {
@@ -73,7 +73,8 @@ class DressUpGame {
 
   handleDragOver(e) {
     e.preventDefault();
-    e.dataTransfer.dropEffect = 'copy';
+    e.dataTransfer.dropEffect = 'move';
+    // 드래그 소스의 effectAllowed와 타겟의 dropEffect가 불일치하면 드롭이 거부됨
   }
 
   handleDragLeave(e) {
@@ -90,6 +91,7 @@ class DressUpGame {
 
     if (this.isDraggingFromBoard) {
       this.createItemOnCharacter(this.draggedElement);
+      this.draggedElement.style.display = 'none';
     }
 
     this.draggedElement = null;
@@ -122,14 +124,22 @@ class DressUpGame {
 
     // 같은 카테고리의 기존 아이템이 있으면 제거
     if (this.wornItems[category]) {
-      this.wornItems[category].remove();
+      const oldItem = this.wornItems[category];
+
+      // 기존 아이템의 원본을 보드에 다시 표시
+      if (oldItem.sourceItem) {
+        oldItem.sourceItem.style.display = '';
+      }
+
+      oldItem.remove();
       this.wornItems[category] = null;
     }
 
     let newItem;
+    const filename = this.getFilename(sourceItem.src);
 
-    // 그룹 아이템 처리(backpack)
-    if (this.getFilename(sourceItem.src) === 'backpack') {
+    // TODO: category bag로 바꾸기
+    if (category === 'accessory' && filename === 'backpack') {
       const newGroup = document.createElement('div');
       newGroup.className = 'placed-item placed-group';
       newGroup.dataset.category = category;
@@ -142,8 +152,8 @@ class DressUpGame {
       const newBackImg = this.createNewImgElement(backSvgPath, sourceItem.alt);
       const newFrontImg = this.createNewImgElement(frontSvgPath, sourceItem.alt);
 
-      newBackImg.style.zIndex = this.zIndexMap.behindBody; // 캐릭터 뒤
-      newFrontImg.style.zIndex = this.zIndexMap.accessory; // 가방 위치
+      newBackImg.style.zIndex = (this.zIndexMap.body - 1).toString(); // 캐릭터 뒤
+      newFrontImg.style.zIndex = this.zIndexMap.accessory.toString(); // 가방 위치
 
       newGroup.appendChild(newBackImg);
       newGroup.appendChild(newFrontImg);
@@ -154,9 +164,18 @@ class DressUpGame {
       newItem.dataset.category = category;
 
       // 카테고리별 z-index 적용
-      const zIndex = this.zIndexMap[category] || 1;
+      let zIndex;
+      if(category === 'hair' && filename === 'long-straight') {
+        zIndex = this.zIndexMap.body + 1;
+      } else {
+        zIndex = this.zIndexMap[category] || 1;
+      }
+
       newItem.style.zIndex = zIndex.toString();
     }
+
+    // 원본 아이템 참조 저장
+    newItem.sourceItem = sourceItem;
 
     // 배치된 아이템에 이동 및 제거 기능 추가
     this.addItemControls(newItem, category);
@@ -195,7 +214,7 @@ class DressUpGame {
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
 
-      const rect = this.characterItems.getBoundingClientRect();
+      // const rect = this.characterItems.getBoundingClientRect();
       const x = currentX;
       const y = currentY;
 
@@ -220,6 +239,11 @@ class DressUpGame {
           this.wornItems[category] = null;
         }
 
+        // 원본 아이템 보드에 다시 표시
+        if (item.sourceItem) {
+          item.sourceItem.style.display = '';
+        }
+
         // 파자마 표시 업데이트
         this.updatePajamaVisibility();
       }
@@ -232,7 +256,7 @@ class DressUpGame {
     item.addEventListener('dblclick', handleDoubleClick);
 
     // 초기 위치 설정
-    const rect = item.getBoundingClientRect();
+    // const rect = item.getBoundingClientRect();
     currentX = parseInt(item.style.left) || 0;
     currentY = parseInt(item.style.top) || 0;
   }
