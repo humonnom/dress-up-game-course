@@ -5,7 +5,7 @@ class DressUpGame {
     this.characterItems = document.getElementById('character-items');
     this.draggableItems = document.querySelectorAll('.draggable');
     this.draggedElement = null;
-    this.offset = { x: 0, y: 0 };
+    // this.offset = { x: 0, y: 0 };
     this.isDraggingFromBoard = false;
 
     // 파자마 요소 참조
@@ -95,7 +95,6 @@ class DressUpGame {
 
     if (!this.draggedElement) return;
 
-    // 아이템 보드에서 드래그한 경우 새 아이템 생성
     if (this.isDraggingFromBoard) {
       this.createItemOnCharacter(this.draggedElement);
     }
@@ -104,24 +103,12 @@ class DressUpGame {
     this.isDraggingFromBoard = false;
   }
 
-  // 파일 경로에서 -on-body.svg 버전으로 변환
-  getOnBodyPath(originalSrc) {
-    return originalSrc.replace('.svg', '-on-body.svg');
+  getOnBodyPath(originalSrc, suffix = '-on-body.svg') {
+    return originalSrc.replace('.svg', suffix);
   }
 
-  getGroupItemOnBodyPaths(originalSrc) {
-    const path = originalSrc.split('/').reverse()[0].split('.')[0];
-    switch (path) {
-      case 'backpack':
-        return {
-          back: originalSrc.replace('.svg', '-on-body-back.svg'),
-          front: originalSrc.replace('.svg', '-on-body-front.svg'),
-        }
-    }
-  }
-
-  isGroupItem(src) {
-    return src.includes('backpack');
+  getFilename(path) {
+    return path.split('/').pop().split('.')[0];
   }
 
   createNewImgElement(src, alt, className) {
@@ -148,7 +135,8 @@ class DressUpGame {
 
     let newItem;
 
-    if (this.isGroupItem(sourceItem.src)) {
+    // 그룹 아이템 처리(backpack)
+    if (this.getFilename(sourceItem.src) === 'backpack') {
       const newGroup = document.createElement('div');
       newGroup.className = 'placed-item placed-group';
       newGroup.dataset.category = category;
@@ -156,12 +144,12 @@ class DressUpGame {
       newGroup.style.left = "0";
       newGroup.style.top = "0";
 
-      const {back, front} = this.getGroupItemOnBodyPaths(sourceItem.src);
-      const newBackImg = this.createNewImgElement(back, sourceItem.alt, 'placed-item back');
-      const newFrontImg = this.createNewImgElement(front, sourceItem.alt, 'placed-item front');
+      const backSvgPath = this.getOnBodyPath(sourceItem.src, '-on-body-back.svg');
+      const frontSvgPath = this.getOnBodyPath(sourceItem.src, '-on-body-front.svg');
+      const newBackImg = this.createNewImgElement(backSvgPath, sourceItem.alt);
+      const newFrontImg = this.createNewImgElement(frontSvgPath, sourceItem.alt);
 
-      // 그룹 아이템은 특별한 z-index 처리
-      newBackImg.style.zIndex = this.zIndexMap.behindBody;  // 캐릭터 뒤
+      newBackImg.style.zIndex = this.zIndexMap.behindBody; // 캐릭터 뒤
       newFrontImg.style.zIndex = this.zIndexMap.accessory; // 가방 위치
 
       newGroup.appendChild(newBackImg);
