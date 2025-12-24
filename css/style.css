@@ -191,21 +191,6 @@ main {
   transition: all 0.2s ease;
 }
 
-.item-group {
-  position: relative;
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-}
-
-.item-group .group-part {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
-}
-
 .item:hover {
   transform: scale(1.05);
   border-color: #4CAF50;

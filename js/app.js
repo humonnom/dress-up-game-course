@@ -5,7 +5,6 @@ class DressUpGame {
     this.characterItems = document.getElementById('character-items');
     this.draggableItems = document.querySelectorAll('.draggable');
     this.draggedElement = null;
-    // this.offset = { x: 0, y: 0 };
     this.isDraggingFromBoard = false;
 
     // 파자마 요소 참조
@@ -61,15 +60,9 @@ class DressUpGame {
     this.characterArea.classList.add('drag-over');
 
     // 드래그 이미지 설정
-    if (e.currentTarget.classList.contains('item-group')) {
-      // 그룹 아이템인 경우 전체 div를 드래그 이미지로 사용
-      e.dataTransfer.setDragImage(e.currentTarget, 50, 50);
-    } else {
-      // 단일 이미지인 경우
-      const img = new Image();
-      img.src = e.currentTarget.src;
-      e.dataTransfer.setDragImage(img, 50, 50);
-    }
+    const img = new Image();
+    img.src = e.currentTarget.src;
+    e.dataTransfer.setDragImage(img, 50, 50);
     e.dataTransfer.effectAllowed = 'copy';
   }
 
