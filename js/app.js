@@ -18,7 +18,7 @@ class DressUpGame {
       pants: null,
       top: null,
       outer: null,
-      accessory: null,
+      bag: null,
       hair: null,
       hat: null
     };
@@ -31,7 +31,7 @@ class DressUpGame {
       pants: 3,    // 바지
       top: 4,      // 상의
       outer: 5,    // 아우터
-      accessory: 6, // 액세서리
+      bag: 6,      // 가방
       hair: 7,     // 머리
       hat: 8,      // 모자
     };
@@ -138,8 +138,7 @@ class DressUpGame {
     let newItem;
     const filename = this.getFilename(sourceItem.src);
 
-    // TODO: category bag로 바꾸기
-    if (category === 'accessory' && filename === 'backpack') {
+    if (category === 'bag' && filename === 'backpack') {
       const newGroup = document.createElement('div');
       newGroup.className = 'placed-item placed-group';
       newGroup.dataset.category = category;
@@ -153,7 +152,7 @@ class DressUpGame {
       const newFrontImg = this.createNewImgElement(frontSvgPath, sourceItem.alt);
 
       newBackImg.style.zIndex = (this.zIndexMap.body - 1).toString(); // 캐릭터 뒤
-      newFrontImg.style.zIndex = this.zIndexMap.accessory.toString(); // 가방 위치
+      newFrontImg.style.zIndex = this.zIndexMap.bag.toString(); // 가방 위치
 
       newGroup.appendChild(newBackImg);
       newGroup.appendChild(newFrontImg);

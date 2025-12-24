@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="880.0px" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 400 880" width="400.0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M224.081 780.958C224.081 780.958 224.373 789.126 223.417 795.264C222.461 801.403 221.683 803.594 222.882 808.287C223.864 812.125 229.072 816.759 234.163 819.109C239.254 821.459 243.042 827.108 243.555 828.335C247.26 837.209 248.411 836.828 256.054 841.412C260.92 844.33 276.537 835.728 272.472 830.762C271.514 829.592 267.945 827.057 267.945 827.057C267.945 827.057 264.809 818.195 258.178 811.172C251.547 804.149 245.609 796.141 245.609 796.141L245.468 780.966L224.081 780.958Z" id="Fill"/>
+<path d="M136.026 781.027L135.886 796.201C135.886 796.201 129.948 804.21 123.317 811.232C116.685 818.255 113.55 827.117 113.55 827.117C113.55 827.117 109.98 829.652 109.023 830.822C104.958 835.788 120.575 844.391 125.441 841.472C133.083 836.888 134.234 837.27 137.94 828.395C138.453 827.168 142.24 821.519 147.332 819.169C152.423 816.82 157.631 812.186 158.612 808.347C159.812 803.655 159.034 801.463 158.078 795.325C157.122 789.186 157.413 781.018 157.413 781.018L136.026 781.027Z" id="Fill_2"/>
+</defs>
+<g id="양말">
+<g opacity="1">
+<use fill="#000000" fill-rule="nonzero" opacity="1" stroke="none" xlink:href="#Fill"/>
+<clipPath clip-rule="nonzero" id="ClipPath">
+<use xlink:href="#Fill"/>
+</clipPath>
+<g clip-path="url(#ClipPath)">
+<text fill="#01c72a" font-family="Helvetica" font-size="7" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 164.598 773.407)" x="0" y="0">
+<tspan textLength="64.6338" x="47.4354" y="5.39014"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="12.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="19.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="26.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="80.2061" x="39.6493" y="33.3901"><![CDATA[010101010111010101011]]></tspan>
+<tspan textLength="87.9922" x="35.7562" y="40.3901"><![CDATA[10101110101101001010101]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="47.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="54.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="65.1499" x="47.1774" y="61.3901"><![CDATA[01001010101100011]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="68.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="67.0947" x="46.205" y="75.3901"><![CDATA[0101011010101011 1]]></tspan>
+<tspan textLength="42.8237" x="58.3404" y="82.3901"><![CDATA[01001010101]]></tspan>
+</text>
+</g>
+</g>
+<g opacity="1">
+<use fill="#000000" fill-rule="nonzero" opacity="1" stroke="none" xlink:href="#Fill_2"/>
+<clipPath clip-rule="nonzero" id="ClipPath_2">
+<use xlink:href="#Fill_2"/>
+</clipPath>
+<g clip-path="url(#ClipPath_2)">
+<text fill="#01c72a" font-family="Helvetica" font-size="7" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 55.3076 773.407)" x="0" y="0">
+<tspan textLength="64.6338" x="47.4354" y="5.39014"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="12.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="19.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="26.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="80.2061" x="39.6493" y="33.3901"><![CDATA[010101010111010101011]]></tspan>
+<tspan textLength="87.9922" x="35.7562" y="40.3901"><![CDATA[10101110101101001010101]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="47.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="54.3901"><![CDATA[01010110101010111]]></tspan>
+<tspan textLength="65.1499" x="47.1774" y="61.3901"><![CDATA[01001010101100011]]></tspan>
+<tspan textLength="64.6338" x="47.4354" y="68.3901"><![CDATA[10101110101101001]]></tspan>
+<tspan textLength="67.0947" x="46.205" y="75.3901"><![CDATA[0101011010101011 1]]></tspan>
+<tspan textLength="42.8237" x="58.3404" y="82.3901"><![CDATA[01001010101]]></tspan>
+</text>
+</g>
+</g>
+</g>
+</svg>
