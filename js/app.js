@@ -20,7 +20,7 @@ class DressUpGame {
       outer: null,
       bag: null,
       hair: null,
-      hat: null
+      headwear: null
     };
 
     // 카테고리별 z-index 매핑
@@ -33,7 +33,8 @@ class DressUpGame {
       outer: 5,    // 아우터
       bag: 6,      // 가방
       hair: 7,     // 머리
-      hat: 8,      // 모자
+      headwear: 8, // 머리 액세서리
+      'music-device': 9, // 음악기기
     };
 
     this.init();
@@ -138,6 +139,7 @@ class DressUpGame {
     let newItem;
     const filename = this.getFilename(sourceItem.src);
 
+    // 가방은 앞/뒤 이미지로 구성된 그룹 생성
     if (category === 'bag' && filename === 'backpack') {
       const newGroup = document.createElement('div');
       newGroup.className = 'placed-item placed-group';
@@ -164,6 +166,7 @@ class DressUpGame {
 
       // 카테고리별 z-index 적용
       let zIndex;
+      // z-index 예외처리
       if(category === 'hair' && filename === 'long-straight') {
         zIndex = this.zIndexMap.body + 1;
       } else {

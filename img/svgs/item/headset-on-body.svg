@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="880.0px" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 400 880" width="400.0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<radialGradient cx="0" cy="0" gradientTransform="matrix(9.77584 -0.494164 0.494318 9.77888 132.264 162.76)" gradientUnits="userSpaceOnUse" id="RadialGradient" r="1">
+<stop offset="0" stop-color="#d3d3d3"/>
+<stop offset="1" stop-color="#a4a4a4"/>
+</radialGradient>
+<radialGradient cx="0" cy="0" gradientTransform="matrix(-9.77584 -0.494164 -0.494318 9.77888 254.097 162.76)" gradientUnits="userSpaceOnUse" id="RadialGradient_2" r="1">
+<stop offset="0" stop-color="#d3d3d3"/>
+<stop offset="1" stop-color="#a4a4a4"/>
+</radialGradient>
+<radialGradient cx="0" cy="0" gradientTransform="matrix(39.4711 -43.9303 39.4096 43.9988 193.21 119.996)" gradientUnits="userSpaceOnUse" id="RadialGradient_3" r="1">
+<stop offset="0" stop-color="#fefefe"/>
+<stop offset="1" stop-color="#a4a4a4"/>
+</radialGradient>
+</defs>
+<g id="Item-헤드셋">
+<g opacity="1">
+<path d="M122.5 164.492C122.246 159.472 125.18 147.042 126.142 143.126C127.728 136.67 134.636 139.226 138.279 139.042C144.133 138.746 149.422 149.285 150.094 162.581C150.766 175.876 146.566 186.895 140.713 187.191C138.288 187.313 133.364 189.186 130.134 186.331C125.569 182.297 122.894 172.278 122.5 164.492Z" fill="#888888" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M122.488 163.254C121.816 149.958 125.648 138.959 131.047 138.686C136.446 138.413 141.368 148.97 142.04 162.266C142.712 175.562 138.88 186.561 133.481 186.834C128.082 187.107 123.161 176.55 122.488 163.254Z" fill="url(#RadialGradient)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+<g opacity="1">
+<path d="M263.862 164.492C264.115 159.472 261.181 147.042 260.219 143.126C258.633 136.67 251.726 139.226 248.082 139.042C242.229 138.746 236.939 149.285 236.267 162.581C235.595 175.876 239.795 186.895 245.648 187.191C248.074 187.313 252.998 189.186 256.228 186.331C260.793 182.297 263.468 172.278 263.862 164.492Z" fill="#888888" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M263.873 163.254C264.545 149.958 260.713 138.959 255.314 138.686C249.915 138.413 244.994 148.97 244.322 162.266C243.65 175.562 247.481 186.561 252.881 186.834C258.28 187.107 263.201 176.55 263.873 163.254Z" fill="url(#RadialGradient_2)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+<path d="M135.32 148.868C135.32 112.314 161.754 82.5682 193.21 82.5682C224.665 82.5682 250.164 112.201 250.164 148.756C250.164 160.994 246.008 160.779 245.192 151.819C243.574 134.045 227.666 91.2928 192.769 91.6687C158.771 92.0348 143.256 131.16 140.254 148.675C139.747 151.635 139.487 154.213 138.984 155.693C138.149 158.153 135.289 155.283 135.289 155.283C135.289 155.283 135.32 152.115 135.32 148.868Z" fill="url(#RadialGradient_3)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</svg>
