@@ -283,4 +283,15 @@ class DressUpGame {
 // 페이지 로드 시 게임 초기화
 document.addEventListener('DOMContentLoaded', () => {
   new DressUpGame();
+
+  // 2초 후 로딩 화면 숨기고 아이템 보드 표시
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const itemBoardContent = document.getElementById('item-board-content');
+
+    if (loadingScreen && itemBoardContent) {
+      loadingScreen.style.display = 'none';
+      itemBoardContent.style.display = 'block';
+    }
+  }, 2000);
 });
