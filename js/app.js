@@ -60,10 +60,6 @@ class DressUpGame {
     e.currentTarget.classList.add('dragging');
     this.characterArea.classList.add('drag-over');
 
-    // 드래그 이미지 설정
-    const img = new Image();
-    img.src = e.currentTarget.src;
-    // e.dataTransfer.setDragImage(img, 50, 50);
     e.dataTransfer.effectAllowed = 'move';
   }
 
@@ -216,7 +212,6 @@ class DressUpGame {
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
 
-      // const rect = this.characterItems.getBoundingClientRect();
       const x = currentX;
       const y = currentY;
 
@@ -287,7 +282,6 @@ class DressUpGame {
     item.addEventListener('dblclick', handleDoubleClick);
 
     // 초기 위치 설정
-    // const rect = item.getBoundingClientRect();
     currentX = parseInt(item.style.left) || 0;
     currentY = parseInt(item.style.top) || 0;
   }
