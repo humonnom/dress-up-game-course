@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="880.0px" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 400 880" width="400.0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<radialGradient cx="0" cy="0" gradientTransform="matrix(55.5597 0 0 55.5597 194.432 122.87)" gradientUnits="userSpaceOnUse" id="RadialGradient" r="1">
+<stop offset="0" stop-color="#ececf2"/>
+<stop offset="1" stop-color="#d7b67d"/>
+</radialGradient>
+</defs>
+<g id="Item-캡모자">
+<path d="M193.117 65.5436C245.002 65.5436 251.771 112.668 252.451 115.961C253.132 119.253 252.903 122.574 252.903 122.574C252.903 122.574 232.071 116.685 193.79 116.685C155.509 116.685 135.35 123.996 135.35 123.996C135.35 123.996 133.847 122.379 134.293 118.944C136.308 103.445 140.85 65.5436 193.117 65.5436Z" fill="#d7b67d" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path d="M252.865 122.564C252.865 122.564 230.338 108.425 194.487 108.425C158.637 108.425 134.36 121.734 134.36 121.734C134.36 121.734 134.067 133.612 148.044 132.295C162.021 130.978 171.344 118.877 194.833 119.347C218.322 119.817 221.72 130.28 236.054 131.58C250.388 132.88 252.865 122.564 252.865 122.564Z" fill="url(#RadialGradient)" fill-rule="nonzero" opacity="1" stroke="none"/>
+<text fill="#000002" font-family="JCkg" font-size="16" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 175.792 89.7506)" x="0" y="0">
+<tspan textLength="31.9688" x="0" y="12.7844"><![CDATA[코딩]]></tspan>
+</text>
+<text fill="#000002" font-family="JCkg" font-size="16" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 178.487 72.7339)" x="0" y="0">
+<tspan textLength="5.15122" x="0" y="12.7844"><![CDATA[I]]></tspan>
+</text>
+<path d="M191.623 75.706C194.895 72.7973 198.41 77.5107 198.41 77.5107C198.41 77.5107 202.145 73.044 204.826 75.3988C207.507 77.7536 205.529 80.5525 203.487 82.9869C201.483 85.3758 198.311 86.5261 198.311 86.5261C198.311 86.5261 194.832 85.1662 192.732 82.7672C190.807 80.5695 189.963 77.1823 191.623 75.706Z" fill="#ec0014" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</svg>

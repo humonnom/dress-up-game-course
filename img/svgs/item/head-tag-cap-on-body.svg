@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="880.0px" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 400 880" width="400.0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<radialGradient cx="0" cy="0" gradientTransform="matrix(55.5597 0 0 55.5597 194.432 122.87)" gradientUnits="userSpaceOnUse" id="RadialGradient" r="1">
+<stop offset="0" stop-color="#ececf2"/>
+<stop offset="1" stop-color="#6d6d9b"/>
+</radialGradient>
+</defs>
+<g id="Item-캡모자">
+<path d="M193.117 65.5436C245.002 65.5436 251.771 112.668 252.451 115.961C253.132 119.253 252.903 122.574 252.903 122.574C252.903 122.574 232.071 116.685 193.79 116.685C155.509 116.685 135.35 123.996 135.35 123.996C135.35 123.996 133.847 122.379 134.293 118.944C136.308 103.445 140.85 65.5436 193.117 65.5436Z" fill="#6d6d9b" fill-rule="nonzero" opacity="1" stroke="none"/>
+<text fill="#ffffff" font-family="Helvetica" font-size="16" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 148.471 84.0806)" x="0" y="0">
+<tspan textLength="54.2812" x="16.0257" y="12.3203"><![CDATA[<head>]]></tspan>
+</text>
+<path d="M252.865 122.564C252.865 122.564 230.338 108.425 194.487 108.425C158.637 108.425 134.36 121.734 134.36 121.734C134.36 121.734 134.067 133.612 148.044 132.295C162.021 130.978 171.344 118.877 194.833 119.347C218.322 119.817 221.72 130.28 236.054 131.58C250.388 132.88 252.865 122.564 252.865 122.564Z" fill="url(#RadialGradient)" fill-rule="nonzero" opacity="1" stroke="none"/>
+</g>
+</svg>
