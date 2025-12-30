@@ -280,12 +280,36 @@ class DressUpGame {
   }
 }
 
+// 이미지 로드 완료 확인 함수
+function waitForImagesToLoad() {
+  const itemBoardContent = document.getElementById('item-board-content');
+  const images = itemBoardContent.querySelectorAll('img.item');
+
+  const imagePromises = Array.from(images).map(img => {
+    return new Promise((resolve, reject) => {
+      if (img.complete) {
+        // 이미 로드된 이미지
+        resolve();
+      } else {
+        // 로드 대기
+        img.addEventListener('load', resolve);
+        img.addEventListener('error', () => {
+          console.warn(`Failed to load image: ${img.src}`);
+          resolve(); // 에러가 나도 계속 진행
+        });
+      }
+    });
+  });
+
+  return Promise.all(imagePromises);
+}
+
 // 페이지 로드 시 게임 초기화
 document.addEventListener('DOMContentLoaded', () => {
   new DressUpGame();
 
-  // 2초 후 로딩 화면 숨기고 아이템 보드 표시
-  setTimeout(() => {
+  // 모든 아이템 이미지가 로드될 때까지 기다린 후 로딩 화면 숨기기
+  waitForImagesToLoad().then(() => {
     const loadingScreen = document.getElementById('loading-screen');
     const itemBoardContent = document.getElementById('item-board-content');
 
@@ -293,5 +317,5 @@ document.addEventListener('DOMContentLoaded', () => {
       loadingScreen.style.display = 'none';
       itemBoardContent.style.display = 'block';
     }
-  }, 2000);
+  });
 });
