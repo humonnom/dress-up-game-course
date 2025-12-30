@@ -224,10 +224,39 @@ class DressUpGame {
       item.style.top = `${y}px`;
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (e) => {
       if (isDragging) {
         isDragging = false;
         item.style.cursor = 'move';
+
+        // 캐릭터 영역 밖으로 드래그하면 아이템 삭제
+        const characterRect = this.characterArea.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+
+        // 아이템이 캐릭터 영역 밖에 있는지 체크
+        const isOutside =
+          itemRect.right < characterRect.left ||
+          itemRect.left > characterRect.right ||
+          itemRect.bottom < characterRect.top ||
+          itemRect.top > characterRect.bottom;
+
+        if (isOutside) {
+          // 아이템 제거
+          item.remove();
+
+          // wornItems에서 제거
+          if (this.wornItems[category] === item) {
+            this.wornItems[category] = null;
+          }
+
+          // 원본 아이템 보드에 다시 표시
+          if (item.sourceItem) {
+            item.sourceItem.style.display = '';
+          }
+
+          // 파자마 표시 업데이트
+          this.updatePajamaVisibility();
+        }
       }
     };
 
