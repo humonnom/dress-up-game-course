@@ -115,25 +115,15 @@ dress-up-game-js/
 
 ### 폴더 구조 생성
 
-터미널에서 다음 명령어를 실행하세요:
+깃헙에서 다음 레포지토리를 clone or fork하세요:
 
-```bash
-mkdir dress-up-game-js
-cd dress-up-game-js
-mkdir css js img
-mkdir img/svgs
-mkdir img/svgs/hair img/svgs/clothes img/svgs/shoes img/svgs/item
+```
+https://github.com/humonnom/dress-up-game
 ```
 
-### 파일 생성
+### 파일 확인
 
-다음 빈 파일들을 생성하세요:
-
-```bash
-touch index.html
-touch css/style.css
-touch js/app.js
-```
+아까 설명한대로 구조가 짜여져 있고, svg파일들이 준비되어 있습니다.
 
 ---
 

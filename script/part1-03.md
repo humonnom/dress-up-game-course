@@ -1,164 +1,123 @@
 # Part 1-03: CSS 레이아웃 기본
 
 **강의 시간**: 7분
-**핵심 목표**: Flexbox로 레이아웃 잡고 position absolute로 요소 겹치기
+**핵심 목표**:
 
 ---
 
 ## 🎬 인트로 (20초)
 
-안녕하세요! 지난 시간에는 HTML 구조를 모두 만들었습니다.
+안녕하세요! 지난 시간에는 왼쪽 캐릭터 부분 구조를 만들고 스타일링 까지 했습니다.
 
-이번 시간에는 CSS로 이 구조를 예쁘게 꾸며볼 거예요.
-Flexbox로 양쪽 레이아웃을 잡고, position absolute로 캐릭터 위에 옷을 겹치는 방법을 배워보겠습니다.
+이번 시간에는 오른쪽 아이템 보드 구조를 만들고 스타일링 할 거예요.
 
 그럼 시작해볼까요!
 
 ---
 
-## 🎨 기본 스타일 리셋 (1분)
+## 🎨 아이템 보드 구성 (2분)
 
-먼저 `css/style.css` 파일을 열어주세요.
+이제 아이템 보드를 만들어볼게요. 먼저 머리 카테고리부터 시작하겠습니다.
 
-모든 브라우저에서 일관된 결과를 위해 기본 스타일을 리셋하겠습니다.
-
-```css
-/* 기본 리셋 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  padding: 20px;
-}
-
-main {
-  max-width: 1400px;
-  margin: 0 auto;
-}
+```html
+<div class="item-board">
+  <!-- 머리 카테고리 -->
+  <div class="item-category">
+    <h3>머리</h3>
+    <div class="item-list">
+      <img src="img/svgs/hair/short.svg"
+           class="item draggable"
+           data-category="hair"
+           alt="짧은 머리"
+           draggable="true">
+      <img src="img/svgs/hair/green.svg"
+           class="item draggable"
+           data-category="hair"
+           alt="초록 머리"
+           draggable="true">
+      <img src="img/svgs/hair/long-straight.svg"
+           class="item draggable"
+           data-category="hair"
+           alt="긴 생머리"
+           draggable="true">
+    </div>
+  </div>
+</div>
 ```
 
-여기서 중요한 점:
-- `box-sizing: border-box`: 패딩과 테두리를 너비에 포함
-- `max-width`: 화면이 너무 넓어지지 않도록 제한
-- `margin: 0 auto`: 중앙 정렬
+여기서 핵심은 **data-category 속성**입니다!
+
+```html
+data-category="hair"
+```
+
+이 속성을 사용하는 이유:
+1. JavaScript에서 아이템의 카테고리를 쉽게 식별
+2. 같은 카테고리의 아이템은 하나만 착용 가능하도록 제어
+3. 카테고리별로 다른 z-index를 적용하기 위해
+
+그리고 **draggable="true"** 속성은 HTML5 드래그 앤 드롭 API를 활성화합니다.
 
 ---
 
-## 📐 게임 컨테이너 레이아웃 (1분 30초)
+## 📦 나머지 카테고리 추가 (30초)
 
-이제 게임의 전체 레이아웃을 Flexbox로 잡아볼게요.
+같은 방식으로 다른 카테고리들도 추가해볼게요.
 
-```css
-.game-container {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  height: 880px;
-}
+```html
+<!-- 상의 카테고리 -->
+<div class="item-category">
+  <h3>상의</h3>
+  <div class="item-list">
+    <img src="img/svgs/clothes/three-color-knit.svg"
+         class="item draggable"
+         data-category="top"
+         alt="니트"
+         draggable="true">
+    <img src="img/svgs/clothes/check-shirt.svg"
+         class="item draggable"
+         data-category="top"
+         alt="체크셔츠"
+         draggable="true">
+  </div>
+</div>
+
+<!-- 바지 카테고리 -->
+<div class="item-category">
+  <h3>바지</h3>
+  <div class="item-list">
+    <img src="img/svgs/clothes/jeans.svg"
+         class="item draggable"
+         data-category="pants"
+         alt="청바지"
+         draggable="true">
+    <img src="img/svgs/clothes/cotton-pants.svg"
+         class="item draggable"
+         data-category="pants"
+         alt="면바지"
+         draggable="true">
+  </div>
+</div>
 ```
 
-*[화면: 개발자 도구에서 Flexbox 레이아웃 시각화]*
-
-- `display: flex`: Flexbox 레이아웃 활성화
-- `gap: 40px`: 캐릭터 영역과 아이템 보드 사이 간격
-- `align-items: flex-start`: 위쪽 정렬
-- `height: 880px`: 전체 높이 고정
-
-이렇게 하면 캐릭터 영역과 아이템 보드가 자동으로 좌우로 배치됩니다!
+이런 식으로 양말, 신발, 가방, 액세서리 카테고리도 모두 추가하시면 됩니다.
 
 ---
 
-## 👤 캐릭터 영역 스타일링 (1분 30초)
+## ♿ 접근성 중요성 (30초)
 
-캐릭터 영역을 꾸며볼게요. 여기서 핵심은 **position: relative**입니다.
+잠깐! 여기서 중요한 포인트 하나 짚고 넘어갈게요.
 
-```css
-.character-area {
-  position: relative;
-  background: white;
-  margin-left: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#character {
-  display: block;
-  pointer-events: none;
-}
+```html
+alt="청바지"
 ```
 
-왜 `position: relative`가 중요할까요?
+모든 이미지에 **alt 속성**을 꼭 작성해야 합니다. 이유는:
+1. 스크린 리더 사용자를 위한 접근성
+2. 이미지 로드 실패 시 대체 텍스트 표시
+3. SEO 최적화
 
-*[화면: position 개념 시각화]*
-
-부모 요소를 `relative`로 설정하면, 내부의 `absolute` 요소들이 이 영역을 기준으로 위치하게 됩니다.
-
-`pointer-events: none`은 캐릭터 이미지를 클릭할 수 없게 만들어서, 드래그 이벤트가 아래 요소로 전달되게 합니다.
-
----
-
-## 🎭 요소 겹치기 - position absolute (2분)
-
-이제 가장 중요한 부분입니다. 캐릭터 위에 옷을 어떻게 겹칠까요?
-
-```css
-#character-items {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-#character-items img {
-  position: absolute;
-  cursor: move;
-  pointer-events: auto;
-}
-```
-
-*[화면: 레이어 개념 설명]*
-
-구조를 보면:
-1. **#character**: 기본 레이어 (캐릭터 몸)
-2. **#default-pajama**: 파자마 레이어
-3. **#character-items**: 착용한 아이템들의 컨테이너
-
-모두 같은 위치에 겹쳐집니다!
-
-```css
-#default-pajama {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#default-pajama img {
-  position: absolute;
-  width: 100%;
-  height: auto;
-}
-
-#pajama-bottom {
-  z-index: 3;
-}
-
-#pajama-top {
-  z-index: 4;
-}
-```
-
-여기서 **z-index**가 등장합니다!
-- 숫자가 클수록 위에 표시됩니다
-- 파자마 상의(4)가 하의(3)보다 위에 보이죠
+간단하지만 매우 중요한 부분이니 꼭 잊지 마세요!
 
 ---
 
