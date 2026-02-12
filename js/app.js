@@ -113,6 +113,7 @@ class DressUpGame {
     img.style.height = 'auto';
     img.style.top = '0';
     img.style.left = '0';
+    img.draggable = false;
     return img;
   }
 
@@ -187,74 +188,6 @@ class DressUpGame {
   }
 
   addItemControls(item, category) {
-    let isDragging = false;
-    let currentX = 0;
-    let currentY = 0;
-    let initialX = 0;
-    let initialY = 0;
-
-    // 마우스로 아이템 이동
-    const handleMouseDown = (e) => {
-      if (e.button !== 0) return; // 왼쪽 클릭만
-
-      isDragging = true;
-      initialX = e.clientX - currentX;
-      initialY = e.clientY - currentY;
-
-      item.style.cursor = 'grabbing';
-      e.preventDefault();
-    };
-
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-
-      e.preventDefault();
-      currentX = e.clientX - initialX;
-      currentY = e.clientY - initialY;
-
-      const x = currentX;
-      const y = currentY;
-
-      item.style.left = `${x}px`;
-      item.style.top = `${y}px`;
-    };
-
-    const handleMouseUp = (e) => {
-      if (isDragging) {
-        isDragging = false;
-        item.style.cursor = 'move';
-
-        // 캐릭터 영역 밖으로 드래그하면 아이템 삭제
-        const characterRect = this.characterArea.getBoundingClientRect();
-        const itemRect = item.getBoundingClientRect();
-
-        // 아이템이 캐릭터 영역 밖에 있는지 체크
-        const isOutside =
-          itemRect.right < characterRect.left ||
-          itemRect.left > characterRect.right ||
-          itemRect.bottom < characterRect.top ||
-          itemRect.top > characterRect.bottom;
-
-        if (isOutside) {
-          // 아이템 제거
-          item.remove();
-
-          // wornItems에서 제거
-          if (this.wornItems[category] === item) {
-            this.wornItems[category] = null;
-          }
-
-          // 원본 아이템 보드에 다시 표시
-          if (item.sourceItem) {
-            item.sourceItem.style.display = '';
-          }
-
-          // 파자마 표시 업데이트
-          this.updatePajamaVisibility();
-        }
-      }
-    };
-
     // 더블클릭으로 아이템 제거
     const handleDoubleClick = () => {
       if (confirm('이 아이템을 제거하시겠습니까?')) {
@@ -275,15 +208,7 @@ class DressUpGame {
       }
     };
 
-    // 이벤트 리스너 추가
-    item.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
     item.addEventListener('dblclick', handleDoubleClick);
-
-    // 초기 위치 설정
-    currentX = parseInt(item.style.left) || 0;
-    currentY = parseInt(item.style.top) || 0;
   }
 
   updatePajamaVisibility() {
