@@ -1,11 +1,13 @@
 // 드래그 앤 드롭 게임
 class DressUpGame {
   constructor() {
+    this.boardDragMimeType = 'application/x-dressup-board-item';
     this.characterArea = document.querySelector('.character-area');
     this.characterItems = document.getElementById('character-items');
     this.draggableItems = document.querySelectorAll('.draggable');
     this.draggedElement = null;
     this.isDraggingFromBoard = false;
+    this.activeMove = null;
 
     // 디폴트 의상
     this.pajamaTop = document.getElementById('pajama-top');
@@ -47,6 +49,20 @@ class DressUpGame {
       item.addEventListener('dragend', (e) => this.handleDragEnd(e));
     });
 
+    // 캐릭터에 배치된 아이템에서 브라우저 기본 이미지 드래그를 차단
+    this.characterItems.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, true);
+    this.characterItems.addEventListener('drop', (e) => {
+      // 보드 드래그가 아닌 모든 내부 drop 차단
+      const isBoardDrag = e.dataTransfer && e.dataTransfer.types && e.dataTransfer.types.includes(this.boardDragMimeType);
+      if (!isBoardDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
     // 캐릭터 영역에 드롭 이벤트 추가
     this.characterArea.addEventListener('dragover', (e) => this.handleDragOver(e));
     this.characterArea.addEventListener('drop', (e) => this.handleDrop(e));
@@ -61,6 +77,9 @@ class DressUpGame {
     this.characterArea.classList.add('drag-over');
 
     e.dataTransfer.effectAllowed = 'move';
+    if (fromBoard) {
+      e.dataTransfer.setData(this.boardDragMimeType, '1');
+    }
   }
 
   handleDragEnd(e) {
@@ -69,6 +88,9 @@ class DressUpGame {
   }
 
   handleDragOver(e) {
+    const isBoardDrag = e.dataTransfer && e.dataTransfer.types && e.dataTransfer.types.includes(this.boardDragMimeType);
+    if (!this.isDraggingFromBoard || !isBoardDrag) return;
+
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
     // 드래그 소스의 effectAllowed와 타겟의 dropEffect가 불일치하면 드롭이 거부됨
@@ -82,6 +104,9 @@ class DressUpGame {
 
   handleDrop(e) {
     e.preventDefault();
+    const isBoardDrag = e.dataTransfer && e.dataTransfer.types && e.dataTransfer.types.includes(this.boardDragMimeType);
+    if (!this.isDraggingFromBoard || !isBoardDrag) return;
+
     this.characterArea.classList.remove('drag-over');
 
     if (!this.draggedElement) return;
@@ -113,6 +138,8 @@ class DressUpGame {
     img.style.height = 'auto';
     img.style.top = '0';
     img.style.left = '0';
+    img.style.userSelect = 'none';
+    img.style.webkitUserDrag = 'none';
     img.draggable = false;
     return img;
   }
@@ -188,27 +215,145 @@ class DressUpGame {
   }
 
   addItemControls(item, category) {
+    // 배포 환경에서 이미지 기본 drag 동작(복사 고스트) 방지
+    item.draggable = false;
+    item.setAttribute('draggable', 'false');
+    item.style.webkitUserDrag = 'none';
+    item.style.userSelect = 'none';
+    item.ondragstart = () => false;
+    item.addEventListener('dragstart', (e) => e.preventDefault());
+    item.addEventListener('mousedown', (e) => e.preventDefault());
+
+    const innerImages = item.querySelectorAll ? item.querySelectorAll('img') : [];
+    innerImages.forEach((img) => {
+      img.draggable = false;
+      img.setAttribute('draggable', 'false');
+      img.style.userSelect = 'none';
+      img.style.webkitUserDrag = 'none';
+      img.ondragstart = () => false;
+      img.addEventListener('dragstart', (e) => e.preventDefault());
+      img.addEventListener('mousedown', (e) => e.preventDefault());
+    });
+
+    // 포인터 드래그로 아이템 위치 조정
+    item.style.cursor = 'grab';
+    item.style.touchAction = 'none';
+
+    const handlePointerDown = (e) => this.handlePlacedItemPointerDown(e, item);
+    const handlePointerMove = (e) => this.handlePlacedItemPointerMove(e);
+    const handlePointerUp = (e) => this.handlePlacedItemPointerUp(e);
+
+    item.addEventListener('pointerdown', handlePointerDown);
+    item.addEventListener('pointermove', handlePointerMove);
+    item.addEventListener('pointerup', handlePointerUp);
+    item.addEventListener('pointercancel', handlePointerUp);
+
     // 더블클릭으로 아이템 제거
     const handleDoubleClick = () => {
       if (confirm('이 아이템을 제거하시겠습니까?')) {
-        item.remove();
-
-        // wornItems에서 제거
-        if (this.wornItems[category] === item) {
-          this.wornItems[category] = null;
-        }
-
-        // 원본 아이템 보드에 다시 표시
-        if (item.sourceItem) {
-          item.sourceItem.style.display = '';
-        }
-
-        // 파자마 표시 업데이트
-        this.updatePajamaVisibility();
+        this.removePlacedItem(item, category);
       }
     };
 
     item.addEventListener('dblclick', handleDoubleClick);
+  }
+
+  handlePlacedItemPointerDown(e, item) {
+    // 좌클릭/터치만 허용
+    if (e.button !== undefined && e.button !== 0) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    this.cleanupDuplicatePlacedItems(item);
+
+    this.activeMove = {
+      item,
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      startLeft: parseFloat(item.style.left) || 0,
+      startTop: parseFloat(item.style.top) || 0
+    };
+
+    item.style.cursor = 'grabbing';
+    item.setPointerCapture(e.pointerId);
+  }
+
+  cleanupDuplicatePlacedItems(activeItem) {
+    const category = activeItem.dataset.category;
+    if (!category) return;
+
+    const sameCategoryItems = this.characterItems.querySelectorAll(`[data-category="${category}"]`);
+    sameCategoryItems.forEach((item) => {
+      if (item !== activeItem) {
+        item.remove();
+      }
+    });
+
+    if (this.wornItems[category] !== activeItem) {
+      this.wornItems[category] = activeItem;
+    }
+  }
+
+  handlePlacedItemPointerMove(e) {
+    if (!this.activeMove || this.activeMove.pointerId !== e.pointerId) return;
+
+    const deltaX = e.clientX - this.activeMove.startX;
+    const deltaY = e.clientY - this.activeMove.startY;
+
+    this.activeMove.item.style.left = `${this.activeMove.startLeft + deltaX}px`;
+    this.activeMove.item.style.top = `${this.activeMove.startTop + deltaY}px`;
+  }
+
+  handlePlacedItemPointerUp(e) {
+    if (!this.activeMove || this.activeMove.pointerId !== e.pointerId) return;
+
+    const item = this.activeMove.item;
+    const category = item.dataset.category;
+    const releasedOutsideCharacter = !this.isPointInsideElement(
+      e.clientX,
+      e.clientY,
+      this.characterArea
+    );
+
+    if (item.hasPointerCapture(e.pointerId)) {
+      item.releasePointerCapture(e.pointerId);
+    }
+
+    item.style.cursor = 'grab';
+
+    if (releasedOutsideCharacter && category) {
+      this.removePlacedItem(item, category);
+    }
+
+    this.activeMove = null;
+  }
+
+  isPointInsideElement(clientX, clientY, element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      clientX >= rect.left &&
+      clientX <= rect.right &&
+      clientY >= rect.top &&
+      clientY <= rect.bottom
+    );
+  }
+
+  removePlacedItem(item, category) {
+    item.remove();
+
+    // wornItems에서 제거
+    if (this.wornItems[category] === item) {
+      this.wornItems[category] = null;
+    }
+
+    // 원본 아이템 보드에 다시 표시
+    if (item.sourceItem) {
+      item.sourceItem.style.display = '';
+    }
+
+    // 파자마 표시 업데이트
+    this.updatePajamaVisibility();
   }
 
   updatePajamaVisibility() {
